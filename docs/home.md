@@ -1,6 +1,6 @@
 # The Osprey
 
-A living record of hardware and software projects — from first schematic to final build
+A living record of hardware and software steps — from first schematic to final build
 
 ## About Elijah Brown and Kelton Jensen
 

@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Project Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<!-- Marked.js: converts Markdown to HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 <style>
   :root {
     --bg: #0a0e14;
@@ -14,7 +16,6 @@
     --border2: #2a3f58;
     --accent: #00c9a7;
     --accent2: #0085ff;
-    --accent-dim: rgba(0,201,167,0.12);
     --text: #d4e2f0;
     --text-muted: #607080;
     --text-dim: #3a4f63;
@@ -32,7 +33,6 @@
     min-height: 100vh;
   }
 
-  /* ── CIRCUIT GRID BACKGROUND ── */
   body::before {
     content: '';
     position: fixed;
@@ -41,7 +41,7 @@
       linear-gradient(var(--border) 1px, transparent 1px),
       linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 40px 40px;
-    opacity: 0.35;
+    opacity: 0.3;
     pointer-events: none;
     z-index: 0;
   }
@@ -51,7 +51,7 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(10, 14, 20, 0.92);
+    background: rgba(10,14,20,0.93);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     display: flex;
@@ -66,11 +66,12 @@
     font-size: 13px;
     color: var(--accent);
     letter-spacing: 0.05em;
-    white-space: nowrap;
     margin-right: auto;
     display: flex;
     align-items: center;
     gap: 8px;
+    white-space: nowrap;
+    text-decoration: none;
   }
 
   .nav-logo::before {
@@ -78,13 +79,10 @@
     width: 8px; height: 8px;
     background: var(--accent);
     border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 6px var(--accent);
   }
 
   .nav-tabs {
     display: flex;
-    gap: 0;
     list-style: none;
     height: 100%;
   }
@@ -94,12 +92,12 @@
   .nav-tabs a {
     display: flex;
     align-items: center;
-    padding: 0 1.25rem;
+    padding: 0 1.1rem;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-muted);
     text-decoration: none;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     border-bottom: 2px solid transparent;
     transition: color 0.15s, border-color 0.15s;
@@ -109,322 +107,193 @@
   .nav-tabs a:hover { color: var(--text); border-bottom-color: var(--border2); }
   .nav-tabs a.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  /* ── MAIN WRAPPER ── */
-  main { position: relative; z-index: 1; }
-
-  /* ── PAGES ── */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* ── HOME PAGE ── */
-  .hero {
-    padding: 5rem 2rem 3rem;
-    max-width: 860px;
+  /* ── CONTENT AREA ── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
     margin: 0 auto;
+    padding: 3rem 2rem 5rem;
   }
 
-  .hero-tag {
+  /* Loading spinner */
+  .loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 4rem 0;
+  }
+
+  .loading::before {
+    content: '';
+    width: 14px; height: 14px;
+    border: 1px solid var(--text-dim);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error state */
+  .error {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: #e05050;
+    padding: 2rem 0;
+    border-left: 2px solid #e05050;
+    padding-left: 1rem;
+  }
+
+  /* ── MARKDOWN CONTENT STYLES ── */
+  .md-body h1 {
+    font-size: 2rem;
+    font-weight: 300;
+    color: #eaf2fc;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .md-body h2 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #eaf2fc;
+    letter-spacing: 0.02em;
+    margin: 2.5rem 0 0.8rem;
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .hero-tag::before {
-    content: '';
-    width: 28px; height: 1px;
-    background: var(--accent);
-    display: inline-block;
-  }
-
-  h1 {
-    font-family: var(--sans);
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 300;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: #eaf2fc;
-    margin-bottom: 1.25rem;
-  }
-
-  h1 span { color: var(--accent); font-weight: 500; }
-
-  .hero-desc {
-    font-size: 15px;
-    color: var(--text-muted);
-    line-height: 1.8;
-    max-width: 560px;
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-stats {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .stat-num {
-    font-family: var(--mono);
-    font-size: 22px;
-    color: var(--accent);
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ── PROJECT CARDS GRID ── */
-  .section-header {
-    max-width: 860px;
-    margin: 0 auto 1.5rem;
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .section-header h2 {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    font-weight: 400;
-  }
-
-  .section-header::after {
+  .md-body h2::after {
     content: '';
     flex: 1;
     height: 1px;
     background: var(--border);
   }
 
-  .cards-grid {
-    max-width: 860px;
-    margin: 0 auto 4rem;
-    padding: 0 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px;
-  }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1.25rem;
-    cursor: pointer;
-    transition: border-color 0.2s, background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
-  .card:hover { border-color: var(--border2); background: var(--surface2); }
-  .card:hover::before { opacity: 1; }
-
-  .card-tag {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-    opacity: 0.7;
-  }
-
-  .card h3 {
-    font-size: 14px;
+  .md-body h3 {
+    font-size: 0.9rem;
     font-weight: 500;
-    color: #eaf2fc;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
-
-  .card p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-
-  .card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .status-dot {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    color: var(--accent);
     font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    margin: 1.5rem 0 0.6rem;
   }
 
-  .status-dot::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
+  .md-body p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 0.9rem;
   }
 
-  .status-dot.wip::before { background: #f0a500; }
-  .status-dot.planned::before { background: var(--text-dim); }
+  .md-body ul, .md-body ol {
+    color: var(--text-muted);
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
 
-  .card-arrow {
+  .md-body li { margin-bottom: 3px; }
+
+  .md-body strong { color: var(--text); font-weight: 500; }
+
+  .md-body a { color: var(--accent2); text-decoration: none; }
+  .md-body a:hover { text-decoration: underline; }
+
+  .md-body blockquote {
+    border-left: 2px solid var(--accent);
+    padding: 0.6rem 1rem;
+    margin: 1rem 0;
+    background: rgba(0,201,167,0.05);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .md-body blockquote p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 13px;
+  }
+
+  .md-body code {
     font-family: var(--mono);
     font-size: 12px;
-    color: var(--text-dim);
-  }
-
-  /* ── INNER PAGE LAYOUT ── */
-  .inner-page {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 3.5rem 2rem 5rem;
-  }
-
-  .page-title {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .page-title h2 {
-    font-size: 1.4rem;
-    font-weight: 400;
-    color: #eaf2fc;
-    letter-spacing: -0.02em;
-  }
-
-  .page-title .badge {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 3px;
-    padding: 2px 7px;
-    letter-spacing: 0.1em;
-  }
-
-  /* ── TIMELINE / STEPS ── */
-  .timeline { position: relative; padding-left: 1.5rem; }
-
-  .timeline::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 8px; bottom: 0;
-    width: 1px;
-    background: var(--border);
-  }
-
-  .step {
-    position: relative;
-    margin-bottom: 2.5rem;
-  }
-
-  .step::before {
-    content: '';
-    position: absolute;
-    left: -1.5rem;
-    top: 6px;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    box-shadow: 0 0 0 3px var(--bg);
-  }
-
-  .step.done::before { background: var(--accent); border-color: var(--accent); }
-  .step.current::before { background: #f0a500; border-color: #f0a500; }
-
-  .step-meta {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-dim);
-    letter-spacing: 0.1em;
-    margin-bottom: 4px;
-  }
-
-  .step h3 {
-    font-size: 14px;
-    font-weight: 500;
-    color: #d4e2f0;
-    margin-bottom: 6px;
-  }
-
-  .step p {
-    font-size: 13px;
-    color: var(--text-muted);
-    line-height: 1.7;
-    max-width: 520px;
-  }
-
-  /* ── PLACEHOLDER EMPTY STATE ── */
-  .empty-state {
-    border: 1px dashed var(--border);
-    border-radius: 6px;
-    padding: 3rem 2rem;
-    text-align: center;
-    margin-top: 1.5rem;
-  }
-
-  .empty-state .icon {
-    font-family: var(--mono);
-    font-size: 28px;
-    color: var(--text-dim);
-    margin-bottom: 1rem;
-  }
-
-  .empty-state p {
-    font-size: 13px;
-    color: var(--text-dim);
-    line-height: 1.6;
-  }
-
-  .empty-state code {
-    font-family: var(--mono);
-    font-size: 11px;
     background: var(--surface2);
+    border: 1px solid var(--border);
     padding: 2px 6px;
     border-radius: 3px;
     color: var(--accent);
   }
 
+  .md-body pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .md-body pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .md-body hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+  }
+
+  .md-body img {
+    max-width: 100%;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    margin: 1rem 0;
+    display: block;
+  }
+
+  .md-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 13px;
+  }
+
+  .md-body th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+    text-align: left;
+  }
+
+  .md-body td {
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 12px;
+  }
+
+  /* Step/progress heading decoration */
+  .md-body h2 .step-status { font-family: var(--mono); font-size: 11px; }
+
   /* ── FOOTER ── */
   footer {
-    position: relative; z-index: 1;
+    position: relative;
+    z-index: 1;
     border-top: 1px solid var(--border);
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -437,165 +306,71 @@
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
-  <div class="nav-logo">PORTFOLIO.SYS</div>
+  <a class="nav-logo" href="#" onclick="loadPage('home'); return false;">PORTFOLIO.SYS</a>
   <ul class="nav-tabs" id="navTabs">
-    <li><a href="#" class="active" data-page="home">Overview</a></li>
-    <li><a href="#" data-page="tab1">Page One</a></li>
-    <li><a href="#" data-page="tab2">Page Two</a></li>
-    <li><a href="#" data-page="tab3">Page Three</a></li>
+    <!-- Tabs are defined here. To rename a tab, change the text between <a> tags.
+         To change which .md file it loads, change the data-file attribute. -->
+    <li><a href="#" class="active" data-file="home" onclick="navClick(this); return false;">Overview</a></li>
+    <li><a href="#" data-file="page-one"   onclick="navClick(this); return false;">Page One</a></li>
+    <li><a href="#" data-file="page-two"   onclick="navClick(this); return false;">Page Two</a></li>
+    <li><a href="#" data-file="page-three" onclick="navClick(this); return false;">Page Three</a></li>
   </ul>
 </nav>
 
-<main>
-
-  <!-- ══════════ HOME PAGE ══════════ -->
-  <div class="page active" id="page-home">
-    <div class="hero">
-      <div class="hero-tag">EK Osprey Drone</div>
-      <p class="hero-desc">
-        A living record of hardware and software projects — from first schematic to final build.
-        Each page tracks progress step by step.
-      </p>
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-num">03</span>
-          <span class="stat-label">Active Projects</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">01</span>
-          <span class="stat-label">Completed</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">2025</span>
-          <span class="stat-label">Started</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="section-header">
-      <h2>Projects</h2>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card" onclick="navigate('tab1')">
-        <div class="card-tag">Page One</div>
-        <h3>Project Alpha</h3>
-        <p>Brief one-line description of what this project is about.</p>
-        <div class="card-footer">
-          <span class="status-dot wip">In progress</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </div>
-      <div class="card" onclick="navigate('tab2')">
-        <div class="card-tag">Page Two</div>
-        <h3>Project Beta</h3>
-        <p>Brief one-line description of what this project is about.</p>
-        <div class="card-footer">
-          <span class="status-dot planned">Planned</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </div>
-      <div class="card" onclick="navigate('tab3')">
-        <div class="card-tag">Page Three</div>
-        <h3>Project Gamma</h3>
-        <p>Brief one-line description of what this project is about.</p>
-        <div class="card-footer">
-          <span class="status-dot done">Complete</span>
-          <span class="card-arrow">→</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════ TAB 1 ══════════ -->
-  <div class="page" id="page-tab1">
-    <div class="inner-page">
-      <div class="page-title">
-        <h2>Page One</h2>
-        <span class="badge">IN PROGRESS</span>
-      </div>
-
-      <div class="timeline">
-        <div class="step done">
-          <div class="step-meta">STEP 01 — COMPLETE</div>
-          <h3>Initial Research & Requirements</h3>
-          <p>Define the goals, gather references, list components needed. Describe what you discovered here.</p>
-        </div>
-        <div class="step current">
-          <div class="step-meta">STEP 02 — CURRENT</div>
-          <h3>Design & Prototyping</h3>
-          <p>Currently working on the first prototype. Add your notes, images, or links to files here.</p>
-        </div>
-        <div class="step">
-          <div class="step-meta">STEP 03 — UPCOMING</div>
-          <h3>Testing & Iteration</h3>
-          <p>Planned testing phase. Add details as you get here.</p>
-        </div>
-        <div class="step">
-          <div class="step-meta">STEP 04 — UPCOMING</div>
-          <h3>Final Build & Documentation</h3>
-          <p>Finalize the build and write up everything learned.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════ TAB 2 ══════════ -->
-  <div class="page" id="page-tab2">
-    <div class="inner-page">
-      <div class="page-title">
-        <h2>Page Two</h2>
-        <span class="badge">PLANNED</span>
-      </div>
-      <div class="empty-state">
-        <div class="icon">[ _ ]</div>
-        <p>This section is coming soon.<br />
-        Edit <code>index.html</code> and replace this block with your project's step-by-step progress.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════ TAB 3 ══════════ -->
-  <div class="page" id="page-tab3">
-    <div class="inner-page">
-      <div class="page-title">
-        <h2>Page Three</h2>
-        <span class="badge">PLANNED</span>
-      </div>
-      <div class="empty-state">
-        <div class="icon">[ _ ]</div>
-        <p>This section is coming soon.<br />
-        Edit <code>index.html</code> and replace this block with your project's step-by-step progress.</p>
-      </div>
-    </div>
-  </div>
-
+<main id="main">
+  <div class="loading">Loading...</div>
 </main>
 
 <footer>
   <span>PORTFOLIO.SYS // GITHUB PAGES</span>
-  <span id="footer-date"></span>
+  <span id="footer-info"></span>
 </footer>
 
 <script>
-  document.getElementById('footer-date').textContent = new Date().getFullYear() + ' // ALL SYSTEMS OPERATIONAL';
+  // ── CONFIG ──────────────────────────────────────────────────
+  // The folder where your .md files live (relative to index.html)
+  const DOCS_FOLDER = 'docs/';
 
-  function navigate(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-tabs a').forEach(a => a.classList.remove('active'));
-    document.getElementById('page-' + pageId).classList.add('active');
-    document.querySelector('[data-page="' + pageId + '"]').classList.add('active');
+  // ── STATE ───────────────────────────────────────────────────
+  let currentFile = null;
+
+  // ── LOAD A PAGE ─────────────────────────────────────────────
+  async function loadPage(file) {
+    if (file === currentFile) return;
+    currentFile = file;
+
+    const main = document.getElementById('main');
+    main.innerHTML = '<div class="loading">Loading...</div>';
+
+    try {
+      const res = await fetch(DOCS_FOLDER + file + '.md');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const md = await res.text();
+      const html = marked.parse(md);
+      main.innerHTML = '<div class="md-body">' + html + '</div>';
+    } catch (err) {
+      main.innerHTML =
+        '<div class="error">Could not load docs/' + file + '.md<br>' +
+        'Make sure the file exists in your docs/ folder.<br><br>' +
+        'Error: ' + err.message + '</div>';
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  document.querySelectorAll('.nav-tabs a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      navigate(link.dataset.page);
-    });
-  });
+  // ── NAV CLICK ───────────────────────────────────────────────
+  function navClick(el) {
+    document.querySelectorAll('.nav-tabs a').forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+    loadPage(el.dataset.file);
+  }
+
+  // ── INIT ────────────────────────────────────────────────────
+  document.getElementById('footer-info').textContent =
+    new Date().getFullYear() + ' // ALL SYSTEMS OPERATIONAL';
+
+  loadPage('home');
 </script>
 </body>
 </html>

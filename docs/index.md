@@ -1,4 +1,4 @@
-Circuit components:
+## Circuit components:
 3 spinning motors
 1 lithuim ion battery
 2 microcontroller

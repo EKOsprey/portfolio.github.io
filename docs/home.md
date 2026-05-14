@@ -8,11 +8,11 @@ This duo of Elijah, being a mechanical engineer, and Kelton, being an electrical
 
 ## Project Summaries
 
-### Page One — Project Alpha
+### Page One — Step Alpha
 Page one consists of pure planning, consisting of component selection, desired variables achievable, budget, and initial design.
 
-### Page Two — Project Beta
+### Page Two — Step Beta
 Brief one-line description of what this project is about. Status: Planned
 
-### Page Three — Project Gamma
+### Page Three — Step Gamma
 Brief one-line description of what this project is about. Status: Complete

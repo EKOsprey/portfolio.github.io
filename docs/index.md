@@ -8,3 +8,5 @@
 2 GPS locators
 1 OLED for contoller
 1 Speed sensor
+450 mm x 100 mm maximum main hub pcb
+contorller can be what i want it to be

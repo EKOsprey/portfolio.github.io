@@ -1,5 +1,7 @@
 ## Component Selection:
 
+All components listed below are the main components required for the build of both the main hub PCB and controller PCB
+
 ## Flight Control
 
 **STM32H743VIT6**

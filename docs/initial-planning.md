@@ -8,9 +8,9 @@
 
 ---
 
-## Research & Requirements 
 
-**Circuit components:**
+
+## Circuit Components and Constraints:
 * 3 spinning motors
 * 1 lithium-ion battery
 * 2 microcontroller
@@ -23,18 +23,3 @@
 * 1 Battery life sensor
 * 450 mm x 100 mm maximum main hub PCB size
 * controller PCB about 150 mm x 100 mm
-
-
----
-
-## Design & Prototyping 
-
-
-
-### Notes
-Add any extra notes, things that went wrong, or things you learned here.
-
----
-
-
-

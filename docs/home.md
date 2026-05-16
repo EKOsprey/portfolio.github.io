@@ -9,10 +9,13 @@ This duo of Elijah, being a mechanical engineer, and Kelton, being an electrical
 ## Project Summaries
 
 ### Page One
-The Initial Planning page consists of pure planning, consisting of component selection, desired variables achievable, budget, and initial design.
+The Initial Planning page consists of pure planning, desired variables achievable, budget, and initial design.
 
 ### Page Two
-The CAD-Schematics page consists of the 3D model of the Osprey and its defining characteristics.
+The Component Selection page consists of all components selected for the controller and main PCB, as well as the filament used for 3D printing.
 
 ### Page Three
+The CAD-Schematics page consists of the 3D model of the Osprey and its defining characteristics.
+
+### Page Four
 The PCB page consists of the PCB schematic, KiCAD PCB files, and its functions.

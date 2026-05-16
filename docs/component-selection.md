@@ -1,21 +1,41 @@
 ## Component Selection:
 
-**Microcontroller**
+## Flight Control
 
-**Motor**
+**STM32H743VIT6**
 
-**Battery**
+![]()
 
-**Radio**
+**Rational:**
 
-**Temperature Sensor**
+**TDK InvenSense ICM-42688-P**
 
-**Gyroscope Sensor**
+![]()
 
-**GPS**
+**Rational:**
 
-**OLED**
+**iST8310**
 
-**Speed Sensor**
+![]()
 
-**Battery Life Sensor**
+**Rational:**
+
+**MS561101BA03-50**
+
+![]()
+
+**Rational:**
+
+---
+
+## Propulsion and Power
+
+
+## Communications
+
+
+## Sensors
+
+
+## Controller PCB + display
+

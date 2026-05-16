@@ -1,4 +1,4 @@
-# Page One
+# Initial Planning
 
 
 
@@ -8,7 +8,13 @@
 
 ---
 
+## Budget
 
+---
+
+## Physical Design and Constraints:
+
+---
 
 ## Circuit Components and Constraints:
 * 3 spinning motors

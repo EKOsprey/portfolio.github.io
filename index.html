@@ -365,13 +365,20 @@
     document.querySelectorAll('.nav-tabs a').forEach(a => a.classList.remove('active'));
     el.classList.add('active');
     loadPage(el.dataset.file);
-  }
+    window.location.hash = el.dataset.file;
+}
 
   // ── INIT ────────────────────────────────────────────────────
   document.getElementById('footer-info').textContent =
     new Date().getFullYear() + ' // ALL SYSTEMS OPERATIONAL';
 
-  loadPage('home');
+  const startPage = window.location.hash.replace('#', '') || 'home';
+const startLink = document.querySelector('[data-file="' + startPage + '"]');
+if (startLink) {
+    startLink.classList.add('active');
+    document.querySelector('.nav-tabs a.active:not([data-file="' + startPage + '"])').classList.remove('active');
+}
+loadPage(startPage);
 </script>
 </body>
 </html>

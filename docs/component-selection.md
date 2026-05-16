@@ -4,7 +4,7 @@
 
 **STM32H743VIT6**
 
-![](images/STM32H743VIT6.png)
+![](docs/images/STM32H743VIT6.png)
 
 **Rational:**
 

@@ -9,10 +9,10 @@ This duo of Elijah, being a mechanical engineer, and Kelton, being an electrical
 ## Project Summaries
 
 ### Page One — Step Alpha
-Page one consists of pure planning, consisting of component selection, desired variables achievable, budget, and initial design.
+The Initial Planning page consists of pure planning, consisting of component selection, desired variables achievable, budget, and initial design.
 
 ### Page Two — Step Beta
-Brief one-line description of what this project is about. Status: Planned
+The CAD-Schematics page consists of the 3D model of the Osprey and its defining characteristics.
 
 ### Page Three — Step Gamma
-Brief one-line description of what this project is about. Status: Complete
+The PCB page consists of the PCB schematic, KiCAD PCB files, and its functions.

@@ -21,8 +21,30 @@
 * 1 OLED for contoller
 * 1 Speed sensor
 * 1 Battery life sensor
-* 450 mm x 100 mm maximum main hub pcb
-* controller can be what i want it to be
+* 450 mm x 100 mm maximum main hub PCB size
+* controller about 150 mm x 100 mm
+
+**Component Selection:**
+
+**Microcontroller**
+
+**Motor**
+
+**Battery**
+
+**Radio**
+
+**Temperature Sensor**
+
+**Gyroscope Sensor**
+
+**GPS**
+
+**OLED**
+
+**Speed Sensor**
+
+**Battery Life Sensor**
 
 ---
 

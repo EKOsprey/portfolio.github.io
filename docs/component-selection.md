@@ -8,11 +8,15 @@
 
 **Rational:**
 
+---
+
 **TDK InvenSense ICM-42688-P**
 
 ![](images/ICM-42688-P.png)
 
 **Rational:**
+
+---
 
 **iST8310**
 
@@ -20,11 +24,15 @@
 
 **Rational:**
 
+---
+
 **MS561101BA03-50**
 
 ![](images/MS561101BA03-50.png)
 
 **Rational:**
+
+---
 
 ## Propulsion and Power
 
@@ -34,11 +42,15 @@
 
 **Rational:**
 
+---
+
 **Tattu 14.8V 25C 4S 10000mAh Lipo Battery**
 
 ![](images/EMAX-RS2814.png)
 
 **Rational:**
+
+---
 
 **30A 4-in-1 Brushless ESC**
 
@@ -46,11 +58,15 @@
 
 **Rational:**
 
+---
+
 **Matek XCLASS PDB FCHUB V2 PDB 12S**
 
 ![](images/FCHUB-V2-PDB-12S.png)
 
 **Rational:**
+
+---
 
 
 ## Communications
@@ -61,6 +77,7 @@
 
 **Rational:**
 
+---
 
 ## Sensors
 
@@ -70,11 +87,15 @@
 
 **Rational:**
 
+---
+
 **TSYS01 temperature sensor**
 
 ![](images/TSYS01-Digital-Temperature-Sensor.png)
 
 **Rational:**
+
+---
 
 ## Controller PCB + display
 
@@ -84,11 +105,15 @@
 
 **Rational:**
 
+---
+
 **STM32F405RGT6**
 
 ![](images/STM32F405RGT6.png)
 
-**Rational:
+**Rational:**
+
+---
 
 **Hall effect joystick gimbals**
 
@@ -96,17 +121,23 @@
 
 **Rational:**
 
+---
+
 **MAX17048 fuel gauge**
 
 ![](images/MAX17048-LiPoly.png)
 
 **Rational:**
 
+---
+
 **2S LiPo 2000mAh**
 
 ![](images/2S-7.4V-2000mAh-Lipo-Battery.png)
 
 **Rational:**
+
+---
 
 **TP4056 BMS**
 

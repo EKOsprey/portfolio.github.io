@@ -24,27 +24,6 @@
 * 450 mm x 100 mm maximum main hub PCB size
 * controller about 150 mm x 100 mm
 
-**Component Selection:**
-
-**Microcontroller**
-
-**Motor**
-
-**Battery**
-
-**Radio**
-
-**Temperature Sensor**
-
-**Gyroscope Sensor**
-
-**GPS**
-
-**OLED**
-
-**Speed Sensor**
-
-**Battery Life Sensor**
 
 ---
 
